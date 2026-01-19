@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "./pb";
+
+service UserService {
+    rpc CreateUser (CreateUserRequest) returns (UserResponse);
+    rpc GetUser (GetUserRequest) returns (UserResponse);
+    rpc UpdateUser (UpdateUserRequest) returns (UserResponse);
+    rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
+    rpc ListUsers (ListUserRequest) returns (stream UserResponse);
+}
+
+message User {
+    string id = 1;
+    string name = 2;
+    string email = 3;
+    int32 age = 4;
+}
+
+message CreateUserRequest {
+    string name = 1;
+    string email = 2;
+    int32 age = 3;
+}
+
+message GetUserRequest {
+    string id = 1;
+}
+
+message UpdateUserRequest {
+    string id = 1;
+    string name = 2;
+    string email = 3;
+}
+
+message DeleteUserRequest {
+    string id = 1;
+}
+
+message ListUserRequest {
+    int32 count = 1;
+}
+
+message UserResponse {
+    User user = 1;
+}
+
+message DeleteUserResponse {
+    string message = 1;
+    bool success = 2;
+}
