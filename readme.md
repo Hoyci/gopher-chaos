@@ -85,4 +85,8 @@ Em `pkg/chaos/engine.go`, utilizamos um sync.Pool para gerenciar as instâncias 
 * `A Solução`: Ao usar um pool de geradores locais, garantimos que a injeção de caos não se torne ela mesma o gargalo do sistema durante testes de carga massivos.
 
 ## Suporte a Streaming
-A implementação do `wrappedStream` em `pkg/interceptors/stream.go` é o ponto do projeto em que lidamos com streams gRPC. Nesse cenário, a conexão pode ficar aberta por minutos e o caos não pode ocorrer apenas no início. Ao interceptar `SendMsg` e `RecvMsg`, podemos simular uma conexão que começa bem e degrada no meio do processo, forçando o desenvolvedor a tratar erros dentro do loop de `Recv()`.
+A implementação do `wrappedStream` em `pkg/interceptors/stream.go` é o ponto do projeto em que lidamos com streams gRPC. 
+
+Nesse cenário, a conexão pode ficar aberta por minutos e o caos não pode ocorrer apenas no início. 
+
+Ao interceptar `SendMsg` e `RecvMsg`, podemos simular uma conexão que começa bem e degrada no meio do processo, forçando o desenvolvedor a tratar erros dentro do loop de `Recv()`.
